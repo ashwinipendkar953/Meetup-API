@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
-const { isString } = require("util");
 
 const eventSchema = new mongoose.Schema({
-  name: {
+  eventTitle: {
     type: String,
     required: true,
   },
@@ -10,22 +9,22 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: {
+  eventDescription: {
     type: String,
     required: true,
   },
-  startDateTime: {
+  eventStartDateTime: {
     type: Date,
     required: true,
   },
-  endDateTime: {
+  eventEndDateTime: {
     type: Date,
     required: true,
   },
-  isOnline: {
-    type: Boolean,
-    default: false,
-    required: true,
+  eventType: {
+    type: String,
+    enum: ["Online", "Offline"],
+    default: "Online",
   },
   eventTags: [
     {
@@ -33,60 +32,50 @@ const eventSchema = new mongoose.Schema({
       required: true,
     },
   ],
-  isShareable: {
+  isEventShareable: {
     type: Boolean,
     default: false,
   },
-  dressCode: {
+  eventDressCode: {
     type: String,
-    enum: ["Smart Casual"],
+    enum: ["Smart Casual", "Formal", "Casual"],
     default: "Smart Casual",
   },
-  ageRestriction: {
+  eventAgeRestriction: {
     type: String,
-    enum: ["18 and above"],
-    default: "18 and above",
+    enum: ["None", "18 and above"],
+    default: "None",
   },
-  attendeeCount: {
+  eventAttendeeCount: {
     type: Number,
   },
-  isFree: {
+  isEventFree: {
     type: Boolean,
     default: false,
   },
-  cost: {
+  eventCost: {
     type: Number,
   },
-  location: {
-    type: String, // Corrected typo from 'typr' to 'type'
+  eventAddress: {
+    type: String,
     required: true,
   },
-  organization: {
-    orgName: {
-      type: String,
-      required: true,
-    },
-    orgImageUrl: {
-      type: String, // Corrected type to 'String'
-      required: true,
-    },
-    hosts: [
-      {
-        hostName: {
-          type: String,
-          required: true,
-        },
-        hostImageUrl: {
-          type: String,
-          required: true,
-        },
-        position: {
-          type: String,
-          required: true,
-        },
+  speakers: [
+    {
+      name: {
+        type: String,
+        required: true,
       },
-    ],
-  },
+      imageUrl: {
+        type: String,
+        required: true,
+      },
+      designation: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
 const Event = mongoose.model("Event", eventSchema);

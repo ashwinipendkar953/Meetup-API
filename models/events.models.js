@@ -60,6 +60,10 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  hostedBy: {
+    type: String,
+    required: true,
+  },
   speakers: [
     {
       name: {

@@ -38,8 +38,8 @@ const eventSchema = new mongoose.Schema({
   },
   eventDressCode: {
     type: String,
-    enum: ["Smart Casual", "Formal", "Casual", "Business Casual"],
-    default: "Smart Casual",
+    enum: ["Smart Casual", "Formal", "Casual", "Business Casual", "None"],
+    default: "Casual",
   },
   eventAgeRestriction: {
     type: String,
